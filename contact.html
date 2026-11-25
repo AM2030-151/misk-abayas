@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#596044">
+    <meta name="description" content="تواصلي مع متجر مسك للعبايات للاستفسارات والمساعدة.">
+
+    <title>تواصل معنا | MISK ABAYAS</title>
+
+    <!-- خط Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .contact-page {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 20px;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-header h1 {
+            color: #596044;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .contact-header p {
+            color: #777;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .contact-card {
+            background: #fff;
+            border: 1px solid #E9E2D2;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .04);
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .contact-form label {
+            display: block;
+            color: #596044;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            border: 1px solid #ded8cc;
+            border-radius: 9px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 15px;
+            outline: none;
+            background: #fff;
+            color: #333;
+            transition: .2s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #777C5C;
+            box-shadow: 0 0 0 3px rgba(119, 124, 92, .12);
+        }
+
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .contact-submit {
+            border: none;
+            background: #596044;
+            color: #fff;
+            padding: 14px;
+            border-radius: 9px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .contact-submit:hover {
+            background: #424833;
+            transform: translateY(-2px);
+        }
+
+        .contact-note {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-top: 15px;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 22px;
+        }
+
+        .contact-method {
+            background: #F8F6F0;
+            border: 1px solid #E9E2D2;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: .2s;
+        }
+
+        .contact-method:hover {
+            border-color: #C9BDA7;
+            transform: translateY(-3px);
+        }
+
+        .contact-method h3 {
+            color: #596044;
+            margin: 8px 0;
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .contact-method p {
+            color: #777;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            .contact-page {
+                padding: 12px;
+                margin-top: 20px;
+            }
+
+            .contact-header h1 {
+                font-size: 27px;
+            }
+
+            .contact-card {
+                padding: 18px;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="contact-page">
+
+        <header class="contact-header">
+            <h1>تواصلي معنا</h1>
+            <p>
+                يسعدنا استقبال استفساراتك وملاحظاتك.
+                اكتبي رسالتك وسنعمل على مساعدتك.
+            </p>
+        </header>
+
+        <section class="contact-card">
+
+            <form id="contactForm" class="contact-form">
+
+                <div>
+                    <label for="customerName">الاسم</label>
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="اكتبي اسمك"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="customerEmail">البريد الإلكتروني</label>
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        placeholder="example@email.com"
+                        maxlength="150"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="messageSubject">موضوع الرسالة</label>
+                    <input
+                        type="text"
+                        id="messageSubject"
+                        placeholder="موضوع استفسارك"
+                        maxlength="150"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="customerMessage">الرسالة</label>
+                    <textarea
+                        id="customerMessage"
+                        placeholder="اكتبي رسالتك هنا..."
+                        maxlength="2000"
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="contact-submit">
+                    إرسال الرسالة عبر البريد
+                </button>
+
+            </form>
+
+            <p class="contact-note">
+                ملاحظة: هذه النسخة تفتح تطبيق البريد الإلكتروني لديكِ
+                بعد الضغط على زر الإرسال. لا يتم حفظ الرسالة داخل المتجر.
+            </p>
+
+        </section>
+
+        <section class="contact-methods">
+
+            <article class="contact-method">
+                <div style="font-size:28px;">✉️</div>
+                <h3>البريد الإلكتروني</h3>
+                <p>
+                    يمكن التواصل معنا عبر البريد الإلكتروني الرسمي للمتجر
+                    بعد إضافته.
+                </p>
+            </article>
+
+            <article class="contact-method">
+                <div style="font-size:28px;">💬</div>
+                <h3>خدمة العملاء</h3>
+                <p>
+                    سيتم إضافة وسيلة تواصل مباشرة مع خدمة العملاء لاحقاً.
+                </p>
+            </article>
+
+        </section>
+
+    </main>
+
+    <script>
+        const contactForm = document.getElementById("contactForm");
+
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("customerName").value.trim();
+            const email = document.getElementById("customerEmail").value.trim();
+            const subject = document.getElementById("messageSubject").value.trim();
+            const message = document.getElementById("customerMessage").value.trim();
+
+            if (!name || !email || !subject || !message) {
+                alert("يرجى تعبئة جميع الحقول.");
+                return;
+            }
+
+            // أضف البريد الرسمي للمتجر هنا قبل تفعيل الإرسال.
+            const storeEmail = "";
+
+            if (!storeEmail) {
+                alert("لم تتم إضافة البريد الرسمي للمتجر بعد. سنفعّل إرسال الرسائل بعد تحديده.");
+                return;
+            }
+
+            const body = [
+                "الاسم: " + name,
+                "البريد: " + email,
+                "",
+                message
+            ].join("\n");
+
+            const mailto =
+                "mailto:" + storeEmail +
+                "?subject=" + encodeURIComponent(subject) +
+                "&body=" + encodeURIComponent(body);
+
+            window.location.href = mailto;
+        });
+    </script>
+
+</body>
+
+</html>

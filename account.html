@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#596044">
+  <meta name="description" content="حسابك في متجر مسك للعبايات MISK ABAYAS.">
+  <title>حسابي | MISK ABAYAS</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .account-page {
+      max-width: 520px;
+      margin: 45px auto;
+      padding: 20px;
+    }
+
+    .account-card {
+      background: #fff;
+      border: 1px solid #C9BDA7;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(52, 56, 43, .06);
+    }
+
+    .account-heading {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .account-heading h1 {
+      color: #596044;
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+
+    .account-heading p {
+      color: #777;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .account-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .account-tab {
+      border: 1px solid #C9BDA7;
+      background: #F5F1E8;
+      color: #596044;
+      padding: 12px;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .account-tab.active {
+      background: #596044;
+      color: #fff;
+      border-color: #596044;
+    }
+
+    .account-form {
+      display: grid;
+      gap: 17px;
+    }
+
+    .account-field label {
+      display: block;
+      color: #596044;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .account-field input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px;
+      border: 1px solid #C9BDA7;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .account-field input:focus {
+      border-color: #777C5C;
+      box-shadow: 0 0 0 3px rgba(119, 124, 92, .12);
+    }
+
+    .account-submit,
+    .account-logout {
+      width: 100%;
+      border: none;
+      background: #596044;
+      color: #fff;
+      padding: 14px;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 16px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .account-submit:hover,
+    .account-logout:hover {
+      background: #777C5C;
+    }
+
+    .account-submit:disabled,
+    .account-logout:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .account-message {
+      display: none;
+      padding: 12px;
+      border-radius: 9px;
+      line-height: 1.8;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .account-message.success {
+      display: block;
+      background: #edf4e8;
+      color: #365b32;
+    }
+
+    .account-message.error {
+      display: block;
+      background: #fbecec;
+      color: #9b3333;
+    }
+
+    .account-profile {
+      text-align: center;
+    }
+
+    .profile-icon {
+      width: 75px;
+      height: 75px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #E9E2D2;
+      color: #596044;
+      font-size: 34px;
+    }
+
+    .account-profile h2 {
+      color: #596044;
+      margin: 0 0 8px;
+    }
+
+    .account-profile p {
+      color: #777;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+    }
+
+    .account-profile .account-logout {
+      margin-top: 15px;
+    }
+
+    .account-note {
+      color: #888;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.8;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .account-page {
+        margin: 20px auto;
+        padding: 12px;
+      }
+
+      .account-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">MISK ABAYAS</a>
+
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="search.html">المنتجات</a>
+        <a href="cart.html">السلة</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="account-page">
+    <section class="account-card">
+
+      <div class="account-heading">
+        <h1>حسابي</h1>
+        <p>مرحبًا بكِ في متجر مسك للعبايات</p>
+      </div>
+
+      <div id="accountMessage" class="account-message" role="status"></div>
+
+      <div id="loginSection">
+
+        <div class="account-tabs">
+          <button
+            type="button"
+            class="account-tab active"
+            id="loginTab"
+          >
+            تسجيل الدخول
+          </button>
+
+          <button
+            type="button"
+            class="account-tab"
+            id="signupTab"
+          >
+            حساب جديد
+          </button>
+        </div>
+
+        <form id="accountForm" class="account-form">
+
+          <div class="account-field" id="nameField" hidden>
+            <label for="fullName">الاسم الكامل</label>
+            <input
+              type="text"
+              id="fullName"
+              maxlength="100"
+              autocomplete="name"
+              placeholder="اكتبي اسمك"
+            >
+          </div>
+
+          <div class="account-field">
+            <label for="email">البريد الإلكتروني</label>
+            <input
+              type="email"
+              id="email"
+              maxlength="150"
+              autocomplete="email"
+              placeholder="example@email.com"
+              required
+            >
+          </div>
+
+          <div class="account-field">
+            <label for="password">كلمة المرور</label>
+            <input
+              type="password"
+              id="password"
+              minlength="8"
+              autocomplete="current-password"
+              placeholder="أدخلي كلمة المرور"
+              required
+            >
+          </div>
+
+          <button
+            type="submit"
+            class="account-submit"
+            id="submitButton"
+          >
+            تسجيل الدخول
+          </button>
+
+        </form>
+
+        <p class="account-note">
+          عند إنشاء حساب جديد، قد يطلب منك تأكيد البريد الإلكتروني قبل تسجيل الدخول.
+        </p>
+
+      </div>
+
+      <div id="profileSection" class="account-profile" hidden>
+        <div class="profile-icon">👤</div>
+
+        <h2>مرحبًا بكِ</h2>
+
+        <p id="profileName"></p>
+        <p id="profileEmail"></p>
+
+        <a
+          id="adminLink"
+          href="admin.html"
+          style="display:none;color:#596044;font-weight:bold;"
+        >
+          الانتقال إلى لوحة الإدارة
+        </a>
+
+        <button
+          type="button"
+          class="account-logout"
+          id="logoutButton"
+        >
+          تسجيل الخروج
+        </button>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h3>MISK ABAYAS</h3>
+        <p>أناقة تليق بكِ، وتفاصيل تصنع الفرق.</p>
+      </div>
+
+      <div>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">تواصل معنا</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a href="terms.html">الشروط والأحكام</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import {
+      signUp,
+      signIn,
+      signOut,
+      getCurrentUser,
+      isMerchant
+    } from "./js/auth.js";
+
+    const loginSection = document.getElementById("loginSection");
+    const profileSection = document.getElementById("profileSection");
+
+    const accountForm = document.getElementById("accountForm");
+    const loginTab = document.getElementById("loginTab");
+    const signupTab = document.getElementById("signupTab");
+
+    const nameField = document.getElementById("nameField");
+    const fullNameInput = document.getElementById("fullName");
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    const submitButton = document.getElementById("submitButton");
+    const logoutButton = document.getElementById("logoutButton");
+
+    const messageBox = document.getElementById("accountMessage");
+
+    const profileName = document.getElementById("profileName");
+    const profileEmail = document.getElementById("profileEmail");
+    const adminLink = document.getElementById("adminLink");
+
+    let currentMode = "login";
+
+    function showMessage(message, type = "success") {
+      messageBox.textContent = message;
+      messageBox.className = `account-message ${type}`;
+    }
+
+    function clearMessage() {
+      messageBox.textContent = "";
+      messageBox.className = "account-message";
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+
+      clearMessage();
+
+      const isSignup = mode === "signup";
+
+      nameField.hidden = !isSignup;
+
+      fullNameInput.required = isSignup;
+
+      passwordInput.autocomplete = isSignup
+        ? "new-password"
+        : "current-password";
+
+      loginTab.classList.toggle("active", !isSignup);
+      signupTab.classList.toggle("active", isSignup);
+
+      submitButton.textContent = isSignup
+        ? "إنشاء حساب"
+        : "تسجيل الدخول";
+    }
+
+    loginTab.addEventListener("click", () => {
+      setMode("login");
+    });
+
+    signupTab.addEventListener("click", () => {
+      setMode("signup");
+    });
+
+    function showLoginForm() {
+      loginSection.hidden = false;
+      profileSection.hidden = true;
+      adminLink.style.display = "none";
+    }
+
+    async function showProfile(user) {
+      loginSection.hidden = true;
+      profileSection.hidden = false;
+
+      profileName.textContent =
+        user.user_metadata?.full_name || "عميل مسك";
+
+      profileEmail.textContent = user.email || "";
+
+      try {
+        const allowed = await isMerchant();
+
+        adminLink.style.display = allowed
+          ? "inline-block"
+          : "none";
+      } catch (error) {
+        console.error("تعذر التحقق من صلاحية الإدارة:", error);
+        adminLink.style.display = "none";
+      }
+    }
+
+    async function checkAccount() {
+      try {
+        const user = await getCurrentUser();
+
+        if (user) {
+          await showProfile(user);
+        } else {
+          showLoginForm();
+        }
+      } catch (error) {
+        console.error("خطأ فحص الحساب:", error);
+        showLoginForm();
+      }
+    }
+
+    accountForm.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      clearMessage();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const fullName = fullNameInput.value.trim();
+
+      submitButton.disabled = true;
+
+      submitButton.textContent = currentMode === "signup"
+        ? "جارٍ إنشاء الحساب..."
+        : "جارٍ تسجيل الدخول...";
+
+      try {
+        if (currentMode === "signup") {
+          if (!fullName) {
+            throw new Error("يرجى إدخال الاسم الكامل.");
+          }
+
+          const result = await signUp(
+            email,
+            password,
+            fullName
+          );
+
+          if (result.user && !result.session) {
+            showMessage(
+              "تم إنشاء الحساب. يرجى مراجعة بريدك الإلكتروني لتأكيد الحساب، ثم تسجيل الدخول.",
+              "success"
+            );
+
+            setMode("login");
+            passwordInput.value = "";
+          } else if (result.user) {
+            showMessage("تم إنشاء الحساب بنجاح.", "success");
+            await checkAccount();
+          } else {
+            showMessage(
+              "تم إرسال طلب إنشاء الحساب. تحققي من بريدك الإلكتروني.",
+              "success"
+            );
+          }
+
+        } else {
+          await signIn(email, password);
+
+          showMessage("تم تسجيل الدخول بنجاح.", "success");
+
+          await checkAccount();
+        }
+
+      } catch (error) {
+        console.error("خطأ الحساب:", error);
+
+        showMessage(
+          error.message || "تعذر إكمال العملية. يرجى المحاولة مرة أخرى.",
+          "error"
+        );
+
+      } finally {
+        submitButton.disabled = false;
+
+        submitButton.textContent = currentMode === "signup"
+          ? "إنشاء حساب"
+          : "تسجيل الدخول";
+      }
+    });
+
+    logoutButton.addEventListener("click", async () => {
+      logoutButton.disabled = true;
+      logoutButton.textContent = "جارٍ تسجيل الخروج...";
+
+      try {
+        await signOut();
+
+        showLoginForm();
+        accountForm.reset();
+        setMode("login");
+
+        showMessage("تم تسجيل الخروج بنجاح.", "success");
+
+      } catch (error) {
+        console.error("خطأ تسجيل الخروج:", error);
+
+        showMessage(
+          error.message || "تعذر تسجيل الخروج.",
+          "error"
+        );
+
+      } finally {
+        logoutButton.disabled = false;
+        logoutButton.textContent = "تسجيل الخروج";
+      }
+    });
+
+    await checkAccount();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#596044">
+  <meta name="description" content="إتمام طلبك من متجر مسك للعبايات.">
+  <title>إتمام الطلب | MISK ABAYAS</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .checkout-page {
+      width: min(1050px, 94%);
+      margin: 35px auto;
+    }
+
+    .checkout-title {
+      color: #596044;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .checkout-card {
+      background: #fff;
+      border: 1px solid #C9BDA7;
+      border-radius: 15px;
+      padding: 24px;
+      box-shadow: 0 5px 20px rgba(52,56,43,.05);
+    }
+
+    .checkout-card h2 {
+      color: #596044;
+      margin-top: 0;
+      font-size: 21px;
+    }
+
+    .checkout-form {
+      display: grid;
+      gap: 15px;
+    }
+
+    .checkout-field label {
+      display: block;
+      color: #596044;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .checkout-field input,
+    .checkout-field textarea,
+    .checkout-field select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #C9BDA7;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .checkout-field input:focus,
+    .checkout-field textarea:focus,
+    .checkout-field select:focus {
+      border-color: #777C5C;
+      box-shadow: 0 0 0 3px rgba(119,124,92,.12);
+    }
+
+    .checkout-field textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .checkout-item {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee8dc;
+    }
+
+    .checkout-item img {
+      width: 70px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #E9E2D2;
+    }
+
+    .checkout-item h3 {
+      color: #34382B;
+      font-size: 15px;
+      margin: 0 0 5px;
+    }
+
+    .checkout-item p {
+      color: #777;
+      font-size: 13px;
+      margin: 3px 0;
+    }
+
+    .checkout-item-price {
+      color: #596044;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    .checkout-total-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      color: #666;
+    }
+
+    .checkout-grand-total {
+      border-top: 1px solid #C9BDA7;
+      margin-top: 10px;
+      padding-top: 17px;
+      color: #596044;
+      font-weight: bold;
+      font-size: 19px;
+    }
+
+    .checkout-submit {
+      width: 100%;
+      border: none;
+      border-radius: 9px;
+      background: #596044;
+      color: #fff;
+      padding: 14px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .checkout-submit:hover {
+      background: #777C5C;
+    }
+
+    .checkout-submit:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .checkout-message {
+      display: none;
+      padding: 13px;
+      border-radius: 9px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .checkout-message.error {
+      display: block;
+      background: #fbecec;
+      color: #963939;
+    }
+
+    .checkout-message.success {
+      display: block;
+      background: #edf4e8;
+      color: #365b32;
+    }
+
+    .checkout-notice {
+      color: #777;
+      background: #F5F1E8;
+      border: 1px solid #C9BDA7;
+      border-radius: 9px;
+      padding: 13px;
+      font-size: 13px;
+      line-height: 1.9;
+      margin-top: 15px;
+    }
+
+    .checkout-empty {
+      text-align: center;
+      padding: 40px 15px;
+    }
+
+    .checkout-empty h2 {
+      color: #596044;
+    }
+
+    @media (max-width: 750px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">MISK ABAYAS</a>
+
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="search.html">المنتجات</a>
+        <a href="cart.html">السلة</a>
+        <a href="account.html">حسابي</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="checkout-page">
+
+    <h1 class="checkout-title">إتمام الطلب</h1>
+
+    <div id="checkoutMessage" class="checkout-message" role="status"></div>
+
+    <section id="emptyCart" class="checkout-card checkout-empty" hidden>
+      <h2>سلتك فارغة</h2>
+      <p>أضيفي بعض المنتجات إلى السلة قبل إتمام الطلب.</p>
+      <a href="index.html" class="btn">العودة للتسوق</a>
+    </section>
+
+    <div id="checkoutContent" class="checkout-layout" hidden>
+
+      <section class="checkout-card">
+        <h2>بيانات العميل</h2>
+
+        <form id="checkoutForm" class="checkout-form">
+
+          <div class="checkout-field">
+            <label for="customerName">الاسم الكامل</label>
+            <input
+              type="text"
+              id="customerName"
+              maxlength="100"
+              autocomplete="name"
+              required
+            >
+          </div>
+
+          <div class="checkout-field">
+            <label for="customerPhone">رقم الجوال</label>
+            <input
+              type="tel"
+              id="customerPhone"
+              maxlength="20"
+              autocomplete="tel"
+              placeholder="05xxxxxxxx"
+              required
+            >
+          </div>
+
+          <div class="checkout-field">
+            <label for="customerEmail">البريد الإلكتروني (اختياري)</label>
+            <input
+              type="email"
+              id="customerEmail"
+              maxlength="150"
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="checkout-field">
+            <label for="customerCity">المدينة</label>
+            <input
+              type="text"
+              id="customerCity"
+              maxlength="100"
+              autocomplete="address-level2"
+              required
+            >
+          </div>
+
+          <div class="checkout-field">
+            <label for="customerAddress">العنوان بالتفصيل</label>
+            <textarea
+              id="customerAddress"
+              maxlength="500"
+              autocomplete="street-address"
+              required
+            ></textarea>
+          </div>
+
+          <div class="checkout-notice">
+            الدفع وإرسال الطلب غير مفعّلين حاليًا. سنفعّل تأكيد الطلب بعد إعداد التحقق الآمن من الأسعار والمخزون.
+          </div>
+
+          <button
+            type="submit"
+            class="checkout-submit"
+            id="checkoutSubmit"
+            disabled
+          >
+            تأكيد الطلب قريبًا
+          </button>
+
+        </form>
+      </section>
+
+      <aside class="checkout-card">
+        <h2>ملخص الطلب</h2>
+
+        <div id="checkoutItems"></div>
+
+        <div class="checkout-total-row">
+          <span>عدد القطع</span>
+          <strong id="checkoutQuantity">0</strong>
+        </div>
+
+        <div class="checkout-total-row">
+          <span>المجموع الفرعي</span>
+          <strong id="checkoutSubtotal">0 ر.س</strong>
+        </div>
+
+        <div class="checkout-total-row">
+          <span>الشحن</span>
+          <strong id="checkoutShipping">0 ر.س</strong>
+        </div>
+
+        <div class="checkout-total-row checkout-grand-total">
+          <span>الإجمالي التقديري</span>
+          <strong id="checkoutTotal">0 ر.س</strong>
+        </div>
+
+        <p class="checkout-notice">
+          الأسعار المعروضة تقديرية، وسيتم التحقق من الأسعار الفعلية والمخزون قبل اعتماد أي طلب.
+        </p>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h3>MISK ABAYAS</h3>
+        <p>أناقة تليق بكِ، وتفاصيل تصنع الفرق.</p>
+      </div>
+
+      <div>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">تواصل معنا</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a href="terms.html">الشروط والأحكام</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const store = window.MiskStore;
+      const config = window.STORE_CONFIG || {};
+
+      const emptyCart = document.getElementById("emptyCart");
+      const checkoutContent = document.getElementById("checkoutContent");
+      const checkoutItems = document.getElementById("checkoutItems");
+      const checkoutMessage = document.getElementById("checkoutMessage");
+
+      const submitButton = document.getElementById("checkoutSubmit");
+
+      function formatPrice(value) {
+        return new Intl.NumberFormat("ar-SA", {
+          style: "currency",
+          currency: config.currency || "SAR",
+          maximumFractionDigits: 2
+        }).format(Number(value || 0));
+      }
+
+      function safeText(value) {
+        return String(value ?? "").replace(/[&<>"']/g, character => {
+          const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+          };
+
+          return entities[character];
+        });
+      }
+
+      function safeImage(value) {
+        const url = String(value || "").trim();
+
+        if (
+          url.startsWith("https://") ||
+          url.startsWith("http://")
+        ) {
+          return safeText(url);
+        }
+
+        return "";
+      }
+
+      function showMessage(message, type = "error") {
+        checkoutMessage.textContent = message;
+        checkoutMessage.className = `checkout-message ${type}`;
+      }
+
+      function hideMessage() {
+        checkoutMessage.textContent = "";
+        checkoutMessage.className = "checkout-message";
+      }
+
+      function getShipping(subtotal) {
+        const shipping = config.shipping || {};
+
+        if (shipping.enabled === false) {
+          return 0;
+        }
+
+        const fee = Number(shipping.price ?? 25);
+        const freeMinimum = Number(
+          shipping.freeShippingMinimum ?? 500
+        );
+
+        if (
+          Number.isFinite(freeMinimum) &&
+          freeMinimum > 0 &&
+          subtotal >= freeMinimum
+        ) {
+          return 0;
+        }
+
+        return Number.isFinite(fee) && fee >= 0 ? fee : 0;
+      }
+
+      function renderCheckout() {
+        if (!store) {
+          showMessage("تعذر تحميل السلة. يرجى تحديث الصفحة.");
+          return;
+        }
+
+        const cart = store.getCart();
+
+        if (!cart.length) {
+          checkoutContent.hidden = true;
+          emptyCart.hidden = false;
+          return;
+        }
+
+        emptyCart.hidden = true;
+        checkoutContent.hidden = false;
+
+        let subtotal = 0;
+        let quantity = 0;
+
+        checkoutItems.innerHTML = cart.map(item => {
+          const price = Number(item.price || 0);
+          const amount = Number(item.quantity || 0);
+
+          subtotal += price * amount;
+          quantity += amount;
+
+          return `
+            <article class="checkout-item">
+              <img
+                src="${safeImage(item.image)}"
+                alt="${safeText(item.name)}"
+                onerror="this.style.display='none'"
+              >
+
+              <div>
+                <h3>${safeText(item.name)}</h3>
+                <p>المقاس: ${safeText(item.size || "غير محدد")}</p>
+                <p>الكمية: ${amount}</p>
+                <div class="checkout-item-price">
+                  ${formatPrice(price * amount)}
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        const shipping = getShipping(subtotal);
+        const total = subtotal + shipping;
+
+        document.getElementById("checkoutQuantity").textContent =
+          String(quantity);
+
+        document.getElementById("checkoutSubtotal").textContent =
+          formatPrice(subtotal);
+
+        document.getElementById("checkoutShipping").textContent =
+          formatPrice(shipping);
+
+        document.getElementById("checkoutTotal").textContent =
+          formatPrice(total);
+      }
+
+      document.getElementById("checkoutForm").addEventListener(
+        "submit",
+        function (event) {
+          event.preventDefault();
+
+          hideMessage();
+
+          showMessage(
+            "تأكيد الطلب غير متاح حاليًا. سنفعّله بعد الانتهاء من إعداد الحماية والتحقق من الأسعار والمخزون.",
+            "error"
+          );
+        }
+      );
+
+      renderCheckout();
+    })();
+  </script>
+
+</body>
+</html>

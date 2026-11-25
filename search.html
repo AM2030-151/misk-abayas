@@ -1,0 +1,723 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#596044">
+    <meta name="description" content="ابحث عن العباية المناسبة لك في متجر مسك للعبايات.">
+
+    <title>البحث عن المنتجات | MISK ABAYAS</title>
+
+    <!-- خط Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .search-page {
+            max-width: 1150px;
+            margin: 35px auto;
+            padding: 20px;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .search-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-heading h1 {
+            color: #596044;
+            margin-bottom: 10px;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .search-heading p {
+            color: #777;
+            line-height: 1.9;
+        }
+
+        .search-panel {
+            background: #fff;
+            border: 1px solid #E9E2D2;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 28px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .04);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #C9BDA7;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            background: #fff;
+            color: #333;
+        }
+
+        .search-input:focus,
+        .filter-select:focus {
+            border-color: #777C5C;
+            box-shadow: 0 0 0 3px rgba(119, 124, 92, .12);
+        }
+
+        .search-filters {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #C9BDA7;
+            border-radius: 9px;
+            background: #fff;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+            color: #444;
+            outline: none;
+        }
+
+        .search-results-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .search-results-title h2 {
+            color: #596044;
+            font-size: 21px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .results-count {
+            color: #777C5C;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .search-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .search-product-card {
+            background: #fff;
+            border: 1px solid #E9E2D2;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: .25s ease;
+        }
+
+        .search-product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+            border-color: #C9BDA7;
+        }
+
+        .search-product-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            background: #F8F6F0;
+            display: block;
+        }
+
+        .search-image-placeholder {
+            width: 100%;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F8F6F0;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .search-product-info {
+            padding: 15px;
+        }
+
+        .search-product-info h3 {
+            color: #596044;
+            font-size: 17px;
+            font-weight: 800;
+            margin: 0 0 9px;
+        }
+
+        .search-product-info p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0 0 12px;
+        }
+
+        .search-product-price {
+            color: #596044;
+            font-weight: 800;
+            margin-bottom: 13px;
+        }
+
+        .search-old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 13px;
+            margin-right: 6px;
+            font-weight: 400;
+        }
+
+        .search-product-button {
+            display: block;
+            text-align: center;
+            background: #596044;
+            color: #fff;
+            padding: 11px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .search-product-button:hover {
+            background: #424833;
+            color: #fff;
+        }
+
+        .search-message {
+            text-align: center;
+            padding: 45px 15px;
+            color: #777;
+            background: #fff;
+            border: 1px solid #E9E2D2;
+            border-radius: 14px;
+            grid-column: 1 / -1;
+        }
+
+        .search-message h3 {
+            color: #596044;
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .search-message p {
+            line-height: 1.9;
+        }
+
+        .search-reset {
+            display: block;
+            margin: 18px auto 0;
+            padding: 11px 22px;
+            background: #F8F6F0;
+            border: 1px solid #C9BDA7;
+            color: #596044;
+            border-radius: 8px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .search-reset:hover {
+            background: #E9E2D2;
+        }
+
+        @media (max-width: 600px) {
+            .search-page {
+                padding: 12px;
+                margin-top: 20px;
+            }
+
+            .search-heading h1 {
+                font-size: 25px;
+            }
+
+            .search-filters {
+                grid-template-columns: 1fr;
+            }
+
+            .search-products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .search-product-image,
+            .search-image-placeholder {
+                height: 190px;
+            }
+
+            .search-product-info {
+                padding: 10px;
+            }
+
+            .search-product-info h3 {
+                font-size: 14px;
+            }
+
+            .search-product-info p {
+                font-size: 12px;
+            }
+
+            .search-product-price {
+                font-size: 13px;
+            }
+
+            .search-product-button {
+                font-size: 13px;
+                padding: 10px 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="search-page">
+
+        <header class="search-heading">
+            <h1>ابحث عن عبايتك</h1>
+            <p>اكتشفي تشكيلتنا من العبايات واختاري ما يناسب ذوقك</p>
+        </header>
+
+        <section class="search-panel">
+
+            <input
+                type="search"
+                id="searchInput"
+                class="search-input"
+                placeholder="اكتبي اسم العباية أو كلمة من وصفها..."
+                autocomplete="off"
+            >
+
+            <div class="search-filters">
+
+                <select id="categoryFilter" class="filter-select">
+                    <option value="">جميع الأقسام</option>
+                </select>
+
+                <select id="sortFilter" class="filter-select">
+                    <option value="newest">الأحدث أولاً</option>
+                    <option value="price-low">السعر: من الأقل للأعلى</option>
+                    <option value="price-high">السعر: من الأعلى للأقل</option>
+                    <option value="name">الاسم: أبجدياً</option>
+                </select>
+
+            </div>
+
+            <button type="button" id="resetSearch" class="search-reset">
+                إعادة ضبط البحث
+            </button>
+
+        </section>
+
+        <section>
+
+            <div class="search-results-title">
+                <h2>نتائج البحث</h2>
+                <span id="resultsCount" class="results-count">
+                    جاري تحميل المنتجات...
+                </span>
+            </div>
+
+            <div id="searchProducts" class="search-products">
+                <div class="search-message">
+                    جاري تحميل المنتجات...
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script type="module">
+        import { getProducts } from "./js/products.js";
+
+        const searchInput = document.getElementById("searchInput");
+        const categoryFilter = document.getElementById("categoryFilter");
+        const sortFilter = document.getElementById("sortFilter");
+        const resetButton = document.getElementById("resetSearch");
+        const productsContainer = document.getElementById("searchProducts");
+        const resultsCount = document.getElementById("resultsCount");
+
+        let allProducts = [];
+
+        // حماية النصوص قبل عرضها داخل HTML
+        function escapeHTML(value) {
+            return String(value ?? "").replace(/[&<>"']/g, character => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+            })[character]);
+        }
+
+        // التحقق من رابط الصورة
+        function safeImageURL(value) {
+            try {
+                const url = new URL(String(value ?? ""), window.location.href);
+
+                if (
+                    url.protocol === "https:" ||
+                    url.protocol === "http:"
+                ) {
+                    return url.href;
+                }
+            } catch (error) {
+                // صورة غير صالحة
+            }
+
+            return "";
+        }
+
+        // قراءة السعر مع دعم أسماء الحقول في products.js
+        function getProductPrice(product) {
+            const salePrice = Number(
+                product.salePrice ?? product.sale_price
+            );
+
+            const regularPrice = Number(
+                product.price ?? product.original_price
+            );
+
+            if (
+                product.salePrice !== undefined ||
+                product.sale_price !== undefined
+            ) {
+                if (
+                    Number.isFinite(salePrice) &&
+                    salePrice > 0
+                ) {
+                    return salePrice;
+                }
+            }
+
+            return Number.isFinite(regularPrice)
+                ? regularPrice
+                : 0;
+        }
+
+        // قراءة السعر الأصلي
+        function getRegularPrice(product) {
+            const price = Number(
+                product.price ?? product.original_price
+            );
+
+            return Number.isFinite(price) ? price : 0;
+        }
+
+        // تنسيق السعر بالريال السعودي
+        function formatPrice(price) {
+            return new Intl.NumberFormat("ar-SA", {
+                style: "currency",
+                currency: "SAR"
+            }).format(price);
+        }
+
+        // قراءة صورة المنتج من البيانات المطبّعة أو الأصلية
+        function getProductImage(product) {
+            return (
+                product.image ||
+                product.image_url ||
+                (Array.isArray(product.images) ? product.images[0] : "") ||
+                ""
+            );
+        }
+
+        // قراءة تاريخ إضافة المنتج
+        function getProductDate(product) {
+            return (
+                product.createdAt ||
+                product.created_at ||
+                product.updatedAt ||
+                product.updated_at ||
+                0
+            );
+        }
+
+        // تحميل الأقسام الموجودة في المنتجات
+        function loadCategories() {
+            const categories = [
+                ...new Set(
+                    allProducts
+                        .map(product => product.category)
+                        .filter(category => category)
+                )
+            ];
+
+            categoryFilter.innerHTML =
+                '<option value="">جميع الأقسام</option>';
+
+            categories.forEach(category => {
+                const option = document.createElement("option");
+
+                option.value = category;
+                option.textContent = category;
+
+                categoryFilter.appendChild(option);
+            });
+        }
+
+        // عرض المنتجات
+        function renderProducts(products) {
+            resultsCount.textContent =
+                `عدد المنتجات: ${products.length}`;
+
+            if (!products.length) {
+                productsContainer.innerHTML = `
+                    <div class="search-message">
+                        <h3>لم نعثر على منتجات مطابقة</h3>
+                        <p>جربي تغيير كلمة البحث أو اختيار قسم آخر.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            productsContainer.innerHTML = products.map(product => {
+                const id = encodeURIComponent(
+                    String(product.id ?? "")
+                );
+
+                const name = escapeHTML(product.name);
+                const description = escapeHTML(product.description);
+
+                const image = safeImageURL(
+                    getProductImage(product)
+                );
+
+                const price = getProductPrice(product);
+                const regularPrice = getRegularPrice(product);
+
+                const hasDiscount =
+                    price > 0 &&
+                    regularPrice > 0 &&
+                    price < regularPrice;
+
+                return `
+                    <article class="search-product-card">
+
+                        ${
+                            image
+                                ? `
+                                    <img
+                                        class="search-product-image"
+                                        src="${escapeHTML(image)}"
+                                        alt="${name}"
+                                        loading="lazy"
+                                    >
+                                `
+                                : `
+                                    <div class="search-image-placeholder">
+                                        لا توجد صورة
+                                    </div>
+                                `
+                        }
+
+                        <div class="search-product-info">
+
+                            <h3>${name}</h3>
+
+                            <p>
+                                ${description || "اكتشفي تفاصيل هذا المنتج."}
+                            </p>
+
+                            <div class="search-product-price">
+
+                                ${formatPrice(price)}
+
+                                ${
+                                    hasDiscount
+                                        ? `
+                                            <span class="search-old-price">
+                                                ${formatPrice(regularPrice)}
+                                            </span>
+                                        `
+                                        : ""
+                                }
+
+                            </div>
+
+                            <a
+                                class="search-product-button"
+                                href="product.html?id=${id}"
+                            >
+                                عرض المنتج
+                            </a>
+
+                        </div>
+
+                    </article>
+                `;
+            }).join("");
+        }
+
+        // البحث والتصفية والترتيب
+        function filterProducts() {
+            const searchText = searchInput.value
+                .trim()
+                .toLowerCase();
+
+            const selectedCategory = categoryFilter.value;
+            const sortType = sortFilter.value;
+
+            let filtered = allProducts.filter(product => {
+                const name = String(
+                    product.name ?? ""
+                ).toLowerCase();
+
+                const description = String(
+                    product.description ?? ""
+                ).toLowerCase();
+
+                const category = String(
+                    product.category ?? ""
+                );
+
+                const matchesSearch =
+                    name.includes(searchText) ||
+                    description.includes(searchText) ||
+                    category.toLowerCase().includes(searchText);
+
+                const matchesCategory =
+                    !selectedCategory ||
+                    category === selectedCategory;
+
+                return matchesSearch && matchesCategory;
+            });
+
+            if (sortType === "price-low") {
+                filtered.sort((a, b) =>
+                    getProductPrice(a) - getProductPrice(b)
+                );
+
+            } else if (sortType === "price-high") {
+                filtered.sort((a, b) =>
+                    getProductPrice(b) - getProductPrice(a)
+                );
+
+            } else if (sortType === "name") {
+                filtered.sort((a, b) =>
+                    String(a.name ?? "").localeCompare(
+                        String(b.name ?? ""),
+                        "ar"
+                    )
+                );
+
+            } else {
+                filtered.sort((a, b) =>
+                    new Date(getProductDate(b)) -
+                    new Date(getProductDate(a))
+                );
+            }
+
+            renderProducts(filtered);
+        }
+
+        // تحميل المنتجات من قاعدة البيانات
+        async function initializeSearch() {
+            resultsCount.textContent = "جاري تحميل المنتجات...";
+
+            productsContainer.innerHTML = `
+                <div class="search-message">
+                    جاري تحميل المنتجات...
+                </div>
+            `;
+
+            try {
+                const result = await getProducts();
+
+                if (result?.error) {
+                    throw result.error;
+                }
+
+                const products = Array.isArray(result)
+                    ? result
+                    : result?.data;
+
+                if (!Array.isArray(products)) {
+                    throw new Error("تعذر قراءة قائمة المنتجات.");
+                }
+
+                // عرض المنتجات النشطة فقط
+                allProducts = products.filter(product =>
+                    product.active !== false &&
+                    product.is_active !== false
+                );
+
+                loadCategories();
+                filterProducts();
+
+            } catch (error) {
+                console.error("Search loading error:", error);
+
+                resultsCount.textContent = "تعذر تحميل المنتجات";
+
+                productsContainer.innerHTML = `
+                    <div class="search-message">
+                        <h3>حدث خطأ أثناء تحميل المنتجات</h3>
+
+                        <p>
+                            تأكدي من اتصال الإنترنت وإعدادات قاعدة البيانات،
+                            ثم حاولي مرة أخرى.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="search-reset"
+                            id="retrySearch"
+                        >
+                            إعادة المحاولة
+                        </button>
+                    </div>
+                `;
+
+                document.getElementById("retrySearch")
+                    ?.addEventListener("click", initializeSearch);
+            }
+        }
+
+        // أحداث البحث
+        searchInput.addEventListener("input", filterProducts);
+
+        categoryFilter.addEventListener(
+            "change",
+            filterProducts
+        );
+
+        sortFilter.addEventListener(
+            "change",
+            filterProducts
+        );
+
+        // إعادة ضبط البحث
+        resetButton.addEventListener("click", () => {
+            searchInput.value = "";
+            categoryFilter.value = "";
+            sortFilter.value = "newest";
+
+            filterProducts();
+        });
+
+        // تشغيل الصفحة
+        initializeSearch();
+    </script>
+
+</body>
+</html>

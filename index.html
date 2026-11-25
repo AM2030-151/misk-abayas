@@ -1,1 +1,615 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#596044">
+  <meta name="description" content="متجر مسك للعبايات - عبايات بتصاميم أنيقة وجودة مميزة">
+
+  <title>MISK ABAYAS | متجر مسك للعبايات</title>
+
+  <!-- خط Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .top-bar {
+      background: var(--olive-dark);
+      color: var(--white);
+      text-align: center;
+      padding: 9px 12px;
+      font-size: 14px;
+    }
+
+    .logo span {
+      color: var(--olive-light);
+    }
+
+    .icon-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      font-size: 21px;
+    }
+
+    .count-badge {
+      position: absolute;
+      top: -9px;
+      left: -9px;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      border-radius: 50px;
+      background: var(--olive);
+      color: white;
+      font-size: 10px;
+      text-align: center;
+      line-height: 17px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      color: var(--olive);
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .categories .category-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 110px;
+    }
+
+    .categories .category-card h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .search-box {
+      max-width: 600px;
+      margin: 0 auto 25px;
+    }
+
+    .product-card {
+      position: relative;
+    }
+
+    /* تحسين عرض صورة المنتج */
+    .product-card .product-image {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 320px;
+      aspect-ratio: auto;
+      background: var(--cream, #F8F6F0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-card .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .discount-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--danger);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      z-index: 2;
+    }
+
+    .product-info h3 {
+      color: var(--text);
+      font-size: 17px;
+      margin: 0 0 10px;
+    }
+
+    .product-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .product-actions .btn {
+      flex: 1;
+      min-width: 85px;
+      padding: 9px 10px;
+      font-size: 13px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .favorite-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--beige);
+      color: var(--olive);
+      font-size: 21px;
+      cursor: pointer;
+    }
+
+    .favorite-btn:hover {
+      background: var(--sand);
+    }
+
+    .btn-dark {
+      background: var(--olive-dark);
+      color: white;
+      border: 1px solid var(--olive-dark);
+    }
+
+    .btn-dark:hover {
+      background: var(--olive-light);
+      border-color: var(--olive-light);
+    }
+
+    .add-cart {
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .details-btn {
+      text-decoration: none;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mt-20 {
+      margin-top: 20px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.2);
+      margin-top: 25px;
+      padding-top: 18px;
+      font-size: 13px;
+      color: rgba(255,255,255,.8);
+    }
+
+    @media (max-width: 900px) {
+      .categories {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .product-card .product-image {
+        height: 290px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .categories {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-heading h2 {
+        font-size: 23px;
+      }
+
+      .product-card .product-image {
+        height: 230px;
+      }
+
+      .product-actions {
+        gap: 5px;
+      }
+
+      .product-actions .btn {
+        min-width: 0;
+        padding: 9px 5px;
+        font-size: 12px;
+      }
+
+      .favorite-btn {
+        width: 34px;
+        height: 36px;
+        flex-shrink: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    ✨ أهلاً بك في متجر MISK ABAYAS - أناقتك تبدأ من هنا ✨
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a href="index.html" class="logo">
+        MISK <span>ABAYAS</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="active">الرئيسية</a>
+        <a href="#categories">الأقسام</a>
+        <a href="#products">المنتجات</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">تواصل معنا</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="search.html" class="icon-link" title="البحث">⌕</a>
+
+        <a href="wishlist.html" class="icon-link" title="المفضلة">
+          ♡
+          <span class="count-badge" data-wishlist-count>0</span>
+        </a>
+
+        <a href="cart.html" class="icon-link" title="السلة">
+          🛍
+          <span class="count-badge" data-cart-count>0</span>
+        </a>
+
+        <a href="account.html" class="icon-link" title="حسابي">♙</a>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- الواجهة الرئيسية -->
+    <section class="hero">
+      <div class="container hero-content">
+        <p>أناقة تليق بك</p>
+        <h1>MISK ABAYAS</h1>
+        <p>اكتشفي تشكيلتنا المميزة من العبايات بتصاميم أنيقة</p>
+        <a href="#products" class="btn">تسوقي الآن</a>
+      </div>
+    </section>
+
+    <!-- الأقسام -->
+    <section class="section" id="categories">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>تسوقي حسب القسم</h2>
+          <p>اختاري القسم الذي يناسب ذوقك</p>
+        </div>
+
+        <div class="categories">
+
+          <a href="search.html?category=عبايات كلاسيكية" class="category-card">
+            <h3>العبايات الكلاسيكية</h3>
+          </a>
+
+          <a href="search.html?category=عبايات شتوية" class="category-card">
+            <h3>العبايات الشتوية</h3>
+          </a>
+
+          <a href="search.html?category=عبايات مطرزة" class="category-card">
+            <h3>العبايات المطرزة</h3>
+          </a>
+
+          <a href="search.html?category=عبايات عصرية" class="category-card">
+            <h3>العبايات العصرية</h3>
+          </a>
+
+          <a href="search.html?category=عبايات يومية" class="category-card">
+            <h3>العبايات اليومية</h3>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- المنتجات -->
+    <section class="section" id="products">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>أحدث منتجاتنا</h2>
+          <p>اكتشفي أحدث تشكيلات MISK ABAYAS</p>
+        </div>
+
+        <div class="search-box">
+          <input
+            type="search"
+            id="productSearch"
+            class="form-control"
+            placeholder="ابحثي عن عبايتك المفضلة..."
+          >
+        </div>
+
+        <div id="productsContainer" class="products-grid">
+          <div class="empty-state">
+            <h3>جاري تحميل المنتجات...</h3>
+            <p>يرجى الانتظار</p>
+          </div>
+        </div>
+
+        <div id="productsMessage" class="empty-state hidden">
+          <h3>لا توجد منتجات حاليًا</h3>
+          <p>ستظهر المنتجات هنا عند إضافتها إلى المتجر.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- نبذة عن المتجر -->
+    <section class="section">
+      <div class="container">
+        <div class="card text-center">
+          <h2 style="color:var(--olive);">MISK ABAYAS</h2>
+          <p>تفاصيل أنيقة، واختيارات تناسب ذوقك.</p>
+          <a href="about.html" class="btn btn-dark mt-20">تعرفي علينا</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- تذييل الصفحة -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <h3>MISK ABAYAS</h3>
+          <p>متجر مسك للعبايات، أناقة وجودة في كل تفصيلة.</p>
+        </div>
+
+        <div>
+          <h3>روابط مهمة</h3>
+          <a href="about.html">من نحن</a>
+          <a href="contact.html">تواصل معنا</a>
+          <a href="privacy.html">سياسة الخصوصية</a>
+          <a href="terms.html">الشروط والأحكام</a>
+        </div>
+
+        <div>
+          <h3>حسابك</h3>
+          <a href="account.html">حسابي</a>
+          <a href="cart.html">سلة المشتريات</a>
+          <a href="wishlist.html">المفضلة</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        جميع الحقوق محفوظة © MISK ABAYAS
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+
+  <script type="module">
+    import { getProducts } from "./js/products.js";
+
+    const container = document.getElementById("productsContainer");
+    const message = document.getElementById("productsMessage");
+    const search = document.getElementById("productSearch");
+
+    let products = [];
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[char]);
+    }
+
+    function renderProducts(list) {
+      container.innerHTML = "";
+
+      if (!list.length) {
+        message.classList.remove("hidden");
+        return;
+      }
+
+      message.classList.add("hidden");
+
+      list.forEach(product => {
+        const price = Number(product.price || 0);
+        const salePrice = product.salePrice;
+
+        const hasDiscount =
+          salePrice !== null &&
+          salePrice !== undefined &&
+          Number(salePrice) > 0 &&
+          Number(salePrice) < price;
+
+        const card = document.createElement("article");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <div class="product-image">
+            ${product.image
+              ? `<img
+                    src="${escapeHTML(product.image)}"
+                    alt="${escapeHTML(product.name)}"
+                    loading="lazy"
+                 >`
+              : `<div class="empty-state">صورة المنتج</div>`
+            }
+
+            ${hasDiscount
+              ? `<span class="discount-badge">خصم</span>`
+              : ""
+            }
+          </div>
+
+          <div class="product-info">
+            <h3>${escapeHTML(product.name)}</h3>
+
+            <div class="product-price">
+              ${hasDiscount
+                ? `${Number(salePrice).toLocaleString("ar-SA")} ر.س
+                   <span class="old-price">${price.toLocaleString("ar-SA")} ر.س</span>`
+                : `${price.toLocaleString("ar-SA")} ر.س`
+              }
+            </div>
+
+            <div class="product-actions">
+
+              <!-- الزر الأول: إضافة إلى السلة -->
+              <button class="btn btn-dark add-cart" type="button">
+                أضيفي للسلة
+              </button>
+
+              <!-- الزر الثاني: التفاصيل -->
+              <a
+                class="btn btn-outline details-btn"
+                href="product.html?id=${encodeURIComponent(product.id)}"
+              >
+                التفاصيل
+              </a>
+
+              <!-- المفضلة -->
+              <button
+                class="favorite-btn"
+                type="button"
+                title="المفضلة"
+                aria-label="إضافة إلى المفضلة"
+              >
+                ♡
+              </button>
+
+            </div>
+          </div>
+        `;
+
+        // إضافة المنتج إلى السلة
+        card.querySelector(".add-cart").addEventListener("click", () => {
+          const store = window.MiskStore;
+
+          if (!store) {
+            alert("تعذر تشغيل السلة.");
+            return;
+          }
+
+          store.saveProducts([
+            ...store.getProducts().filter(item =>
+              String(item.id) !== String(product.id)
+            ),
+            product
+          ]);
+
+          const added = store.addToCart(product.id, 1);
+
+          if (added) {
+            window.location.href = "cart.html";
+          }
+        });
+
+        // إضافة المنتج إلى المفضلة
+        card.querySelector(".favorite-btn").addEventListener("click", event => {
+          const store = window.MiskStore;
+
+          if (!store) return;
+
+          const isAdded = store.toggleWishlist(product.id);
+
+          event.currentTarget.textContent = isAdded ? "♥" : "♡";
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    // تحميل المنتجات
+    async function loadProducts() {
+      try {
+        const result = await getProducts();
+
+        if (result?.error) {
+          throw result.error;
+        }
+
+        products = Array.isArray(result)
+          ? result
+          : result?.data;
+
+        if (!Array.isArray(products)) {
+          throw new Error("تعذر قراءة المنتجات.");
+        }
+
+        products = products.filter(product =>
+          product.active !== false &&
+          product.is_active !== false
+        );
+
+        renderProducts(products);
+
+      } catch (error) {
+        console.error("Products loading error:", error);
+
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3>تعذر تحميل المنتجات</h3>
+            <p>تحققي من اتصال قاعدة البيانات وإعدادات صلاحيات عرض المنتجات.</p>
+          </div>
+        `;
+      }
+    }
+
+    // البحث عن المنتجات
+    search.addEventListener("input", () => {
+      const term = search.value.trim().toLowerCase();
+
+      const filtered = products.filter(product =>
+        String(product.name || "").toLowerCase().includes(term)
+      );
+
+      renderProducts(filtered);
+    });
+
+    loadProducts();
+  </script>
+
+</body>
+</html>
